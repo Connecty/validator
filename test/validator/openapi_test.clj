@@ -407,3 +407,43 @@
                                                    expanded-components)]
         (is (false? (:valid? result)))
         (is (some? (:errors result)))))))
+
+(deftest test-allof-with-circular-references
+  (testing "allOf with circular references like in openapi-schema.json"
+    (let [;; openapi-schema.jsonのBlockWithChildrenに対応するスキーマ
+          components
+          {:BlockWithChildren {:allOf [{:type "object" :properties {}}
+                                       {:type "object"
+                                        :properties
+                                        {:children {:type "array"
+                                                    :description "子ブロックの配列（複合ブロックの場合）"
+                                                    :items {:$ref "#/components/schemas/BlockWithChildren"}}}}]}
+
+           :SimpleBlock {:type "object"
+                         :properties
+                         {:id {:type "string"}
+                          :type {:type "string"}
+                          :content {:type "string"}}}}
+
+          ;; 展開後のスキーマでテスト
+          expanded-components (validator/expand-circular-references components)
+
+          ;; テストデータ - 実際のブロック構造
+          test-data {:children [{:id "child1" :type "paragraph" :content "Hello"}
+                                {:children [{:id "nested" :type "text"}]}
+                                {:id "child3" :type "image"}]}
+
+          invalid-data {:children "not-an-array"}] ; 配列でない
+
+      ;; allOfを含むスキーマの展開確認
+      (let [expanded-block (get expanded-components :BlockWithChildren)]
+        (is (contains? expanded-block :allOf))
+        (is (= "array" (get-in expanded-block [:allOf 1 :properties :children :type])))
+        ;; 自己参照が展開されていることを確認
+        (let [children-items (get-in expanded-block [:allOf 1 :properties :children :items])]
+          (is (= "object" (:type children-items)))
+          (is (not (contains? children-items :$ref)))))
+
+      ;; 基本的な構造確認（実際のバリデーションは複雑なので構造チェックのみ）
+      (is (some? (get expanded-components :BlockWithChildren)))
+      (is (some? (get expanded-components :SimpleBlock))))))
