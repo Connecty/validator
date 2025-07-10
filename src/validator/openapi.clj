@@ -144,11 +144,20 @@
                (fn [acc k v]
                  (if (and (= k :$ref)
                           (= v (str "#/components/schemas/" (name schema-name))))
-                   ;; 自己参照を基本的な構造に展開（$refを削除して置き換え）
-                   (merge (dissoc acc :$ref)
-                          {:type "object"
-                           :required ["id"]
-                           :properties {:id {:type "string"}}})
+                   ;; 自己参照を安全に展開（循環プロパティを除外して元スキーマの構造を保持）
+                   (let [safe-schema (-> schema
+                                         (select-keys [:type :required :properties :additionalProperties])
+                                         (update :properties #(reduce-kv
+                                                               (fn [props k v]
+                                                                 (if (and (map? v)
+                                                                          (or (= (:$ref v) (str "#/components/schemas/" (name schema-name)))
+                                                                              (and (= "array" (:type v))
+                                                                                   (= (:$ref (:items v)) (str "#/components/schemas/" (name schema-name))))))
+                                                                   props  ; 循環参照するプロパティを除外
+                                                                   (assoc props k v)))
+                                                               {}
+                                                               %)))]
+                     (merge (dissoc acc :$ref) safe-schema))
                    (assoc acc k (expand-ref v))))
                {}
                s)

@@ -1,0 +1,6104 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Block Editor",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [],
+  "paths": {
+    "/block_editor": {
+      "get": {
+        "summary": "ブロックエディタ設定の取得",
+        "deprecated": false,
+        "description": "ブロックエディタ設定の取得",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/BlockEditor"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "post": {
+        "summary": "ブロックエディタの追加",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BlockEditorCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/BlockEditor"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "put": {
+        "summary": "ブロックエディタの更新",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BlockEditorCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/BlockEditor"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "delete": {
+        "summary": "ブロックエディタの削除",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "削除成功",
+            "headers": {}
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/templates/{templateId}": {
+      "get": {
+        "summary": "テンプレートの取得",
+        "deprecated": false,
+        "description": "指定されたIDのテンプレート詳細を取得します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Template"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "put": {
+        "summary": "テンプレートの更新",
+        "deprecated": false,
+        "description": "指定されたIDのテンプレートを更新します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TemplateUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "更新成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Template"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "リクエストが不正です",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "delete": {
+        "summary": "テンプレートの削除",
+        "deprecated": false,
+        "description": "指定されたIDのテンプレートを削除します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "削除成功",
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "patch": {
+        "summary": "テンプレートの部分更新",
+        "deprecated": false,
+        "description": "テンプレートのメタデータなど特定フィールドのみを更新します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TemplatePatch"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "更新成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Template"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "リクエストが不正です",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/pages": {
+      "get": {
+        "summary": "ページ一覧の取得",
+        "deprecated": false,
+        "description": "アクセス可能なすべてのページのリストを取得します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "一度に取得する最大項目数",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "取得開始位置のオフセット",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Page Schemaに定義した field 名",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dir",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "desc",
+                "asc"
+              ]
+            }
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "description": "filedname=value＆fieldname=value&...  複数指定される場合ANDとして認識される",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {}
+                      }
+                    },
+                    "pagination": {
+                      "type": "object",
+                      "properties": {}
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "post": {
+        "summary": "新規ページの作成",
+        "deprecated": false,
+        "description": "新しいページを作成します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "query",
+            "description": "テンプレートからページを作成する場合に指定するテンプレートID",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PageCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "作成成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Page"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "リクエストが不正です",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたテンプレートが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/pages/validate/slug": {
+      "get": {
+        "summary": "slug重複チェック",
+        "deprecated": false,
+        "description": "slug保存したら重複するかどうのチェック",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "query",
+            "description": "対象slug値",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageId",
+            "in": "query",
+            "description": "対象slug所属ページのid",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "作成成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "リクエストが不正です",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [],
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pages/{pageId}": {
+      "get": {
+        "summary": "ページの取得",
+        "deprecated": false,
+        "description": "指定されたIDのページを取得します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "レスポンスに含める追加情報（containers=コンテナ情報、blocks=ブロック情報を含む）",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "containers",
+                "blocks",
+                "containers.blocks",
+                "all"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/PageWithOptionalContainersAndBlocks"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "put": {
+        "summary": "ページの更新",
+        "deprecated": false,
+        "description": "指定されたIDのページを更新します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "更新範囲（containers=コンテナも更新、blocks=ブロックも更新）",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "containers",
+                "blocks",
+                "containers.blocks",
+                "all"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PageWithOptionalContainersAndBlocks"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "更新成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/PageWithOptionalContainersAndBlocks"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "リクエストが不正です",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "delete": {
+        "summary": "ページの削除",
+        "deprecated": false,
+        "description": "指定されたIDのページを削除します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "削除成功",
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "patch": {
+        "summary": "ページの部分更新",
+        "deprecated": false,
+        "description": "ページのメタデータなど特定フィールドのみを更新します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PagePatch"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "更新成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Page"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "リクエストが不正です",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/pages/import": {
+      "post": {
+        "summary": "ページのインポート",
+        "deprecated": false,
+        "description": "ページ定義をJSONとしてインポートします",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PageImport"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "インポート成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Page"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "リクエストが不正です",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/pages/{pageId}/export": {
+      "get": {
+        "summary": "ページのエクスポート",
+        "deprecated": false,
+        "description": "ページ定義をJSONとしてエクスポートします",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "エクスポート成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageExport"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/pages/{pageId}/containers": {
+      "get": {
+        "summary": "コンテナ一覧の取得",
+        "deprecated": false,
+        "description": "ページ内のすべてのコンテナを取得します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "レスポンスに含める追加情報（blocks=ブロック情報を含む）",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "blocks"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Container"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "post": {
+        "summary": "新規コンテナの追加",
+        "deprecated": false,
+        "description": "ページに新しいコンテナを追加します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContainerCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "作成成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Container"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "リクエストが不正です",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/pages/{pageId}/containers/batch": {
+      "patch": {
+        "summary": "コンテナの一括操作",
+        "deprecated": false,
+        "description": "複数のコンテナを一度に操作します（更新、移動、削除など）",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "operations": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ContainerOperation"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "操作成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Container"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "リクエストが不正です",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/pages/{pageId}/containers/{containerId}": {
+      "get": {
+        "summary": "コンテナの取得",
+        "deprecated": false,
+        "description": "指定されたIDのコンテナを取得します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "containerId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "レスポンスに含める追加情報（blocks=ブロック情報を含む）",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "blocks"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Container"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "put": {
+        "summary": "コンテナの更新",
+        "deprecated": false,
+        "description": "指定されたIDのコンテナを更新します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "containerId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContainerUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "更新成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Container"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "リクエストが不正です",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "delete": {
+        "summary": "コンテナの削除",
+        "deprecated": false,
+        "description": "指定されたIDのコンテナを削除します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "containerId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "削除成功",
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "patch": {
+        "summary": "コンテナの部分更新",
+        "deprecated": false,
+        "description": "コンテナの特定フィールドのみを更新します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "containerId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContainerPatch"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "更新成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Container"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "リクエストが不正です",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/pages/{pageId}/containers/{containerId}/blocks": {
+      "get": {
+        "summary": "ブロック一覧の取得",
+        "deprecated": false,
+        "description": "コンテナ内のすべてのブロックを取得します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "containerId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "レスポンス形式（default=標準形式、editor=Editor.js互換形式）",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "default",
+                "editor"
+              ],
+              "default": "default"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Block"
+                      }
+                    },
+                    "editorData": {
+                      "type": "object",
+                      "description": "Editor.js互換形式のブロックデータ（format=editorの場合）",
+                      "properties": {
+                        "time": {
+                          "type": "integer"
+                        },
+                        "blocks": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {}
+                          }
+                        },
+                        "version": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "post": {
+        "summary": "新規ブロックの追加",
+        "deprecated": false,
+        "description": "コンテナに新しいブロックを追加します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "containerId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BlockCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "作成成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Block"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "リクエストが不正です",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "put": {
+        "summary": "ブロック一括更新（Editor.js形式）",
+        "deprecated": false,
+        "description": "Editor.jsの出力形式でコンテナ内のブロックを一括更新します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "containerId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "time": {
+                    "type": "integer"
+                  },
+                  "blocks": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {}
+                    }
+                  },
+                  "version": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "更新成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Block"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "リクエストが不正です",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/pages/{pageId}/containers/{containerId}/blocks/batch": {
+      "patch": {
+        "summary": "ブロックの一括操作",
+        "deprecated": false,
+        "description": "複数のブロックを一度に操作します（更新、移動、削除など）",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "containerId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "operations": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/BlockOperation"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "操作成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Block"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "リクエストが不正です",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/pages/{pageId}/containers/{containerId}/blocks/{blockId}": {
+      "get": {
+        "summary": "ブロックの取得",
+        "deprecated": false,
+        "description": "指定されたIDのブロックを取得します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "containerId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "blockId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Block"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "put": {
+        "summary": "ブロックの更新",
+        "deprecated": false,
+        "description": "指定されたIDのブロックを更新します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "containerId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "blockId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BlockUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "更新成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Block"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "リクエストが不正です",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "delete": {
+        "summary": "ブロックの削除",
+        "deprecated": false,
+        "description": "指定されたIDのブロックを削除します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "containerId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "blockId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "削除成功",
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "patch": {
+        "summary": "ブロックの部分更新",
+        "deprecated": false,
+        "description": "ブロックの特定フィールドのみを更新します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "containerId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "blockId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BlockPatch"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "更新成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Block"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "リクエストが不正です",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/pages/{pageId}/containers/{containerId}/blocks/{blockId}/children": {
+      "get": {
+        "summary": "子ブロック一覧の取得",
+        "deprecated": false,
+        "description": "特定ブロックの子ブロックを取得します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "containerId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "blockId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Block"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "post": {
+        "summary": "子ブロックの追加",
+        "deprecated": false,
+        "description": "複合ブロック（カード、スライダーなど）の子として新しいブロックを追加します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "containerId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "blockId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BlockCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "作成成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Block"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "リクエストが不正です",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "patch": {
+        "summary": "子ブロックの並べ替え",
+        "deprecated": false,
+        "description": "特定ブロック配下の子ブロックの順番を変更します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "containerId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "blockId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "blockIds": {
+                    "type": "array",
+                    "description": "新しい順序のブロックID配列",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "blockIds"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "更新成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Block"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "リクエストが不正です",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/templates": {
+      "get": {
+        "summary": "テンプレート一覧の取得",
+        "deprecated": false,
+        "description": "利用可能なすべてのテンプレートのリストを取得します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "一度に取得する最大項目数",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "取得開始位置のオフセット",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
+            }
+          },
+          {
+            "name": "categoryId",
+            "in": "query",
+            "description": "テンプレートのカテゴリでフィルタリング",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/TemplateSummary"
+                      }
+                    },
+                    "pagination": {
+                      "$ref": "#/components/schemas/Pagination"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "post": {
+        "summary": "新規テンプレートの作成",
+        "deprecated": false,
+        "description": "既存ページをベースに新しいテンプレートを作成します",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TemplateCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "作成成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Template"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "リクエストが不正です",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/templates/{templateId}/preview": {
+      "get": {
+        "summary": "テンプレートのプレビュー取得",
+        "deprecated": false,
+        "description": "テンプレートのプレビュー情報（ページ構造を含む）を取得します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/TemplatePreview"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/themes": {
+      "get": {
+        "summary": "テーマ一覧の取得",
+        "deprecated": false,
+        "description": "利用可能なすべてのテーマのリストを取得します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "一度に取得する最大項目数",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "取得開始位置のオフセット",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Theme Schemaに定義済みの field name",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dir",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "desc",
+                "asc"
+              ]
+            }
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "description": "filename=value&fieldname=value.....複数指定される場合 ANDと認識される",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {}
+                      }
+                    },
+                    "pagination": {
+                      "type": "object",
+                      "properties": {}
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "post": {
+        "summary": "新規テーマの登録",
+        "deprecated": false,
+        "description": "新しいテーマをメタデータとして登録します",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ThemeCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "作成成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Theme"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "リクエストが不正です",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/themes/import": {
+      "post": {
+        "summary": "テーマパッケージのインポート",
+        "deprecated": false,
+        "description": "テーマファイル一式をZIPアーカイブとしてインポートします",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "ZIPファイル形式のテーマパッケージ",
+                    "examples": [
+                      ""
+                    ],
+                    "example": ""
+                  },
+                  "id": {
+                    "description": "テーマid",
+                    "type": "string",
+                    "examples": [
+                      ""
+                    ],
+                    "example": ""
+                  },
+                  "name": {
+                    "description": "テーマ名",
+                    "type": "string",
+                    "examples": [
+                      ""
+                    ],
+                    "example": ""
+                  },
+                  "description": {
+                    "description": "テーマの説明",
+                    "type": "string",
+                    "examples": [
+                      ""
+                    ],
+                    "example": ""
+                  },
+                  "version": {
+                    "description": "バージョン",
+                    "type": "string",
+                    "examples": [
+                      ""
+                    ],
+                    "example": ""
+                  },
+                  "thumbnail": {
+                    "description": "サムネイル画像のURL",
+                    "type": "string",
+                    "examples": [
+                      ""
+                    ],
+                    "example": ""
+                  },
+                  "author": {
+                    "description": "テーマの作者",
+                    "type": "string",
+                    "examples": [
+                      ""
+                    ],
+                    "example": ""
+                  },
+                  "metadata": {
+                    "type": "string",
+                    "description": "テーマのメタデータ（jsonの文字列）",
+                    "examples": [
+                      ""
+                    ],
+                    "example": ""
+                  },
+                  "variables": {
+                    "description": "テーマのスタイル変数（jsonの文字列）",
+                    "type": "string",
+                    "examples": [
+                      ""
+                    ],
+                    "example": ""
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "インポート成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "warning": {
+                      "type": "string",
+                      "description": "保存成功しましたが、警告メッセージがあればこのfiledに保存する"
+                    }
+                  },
+                  "required": [
+                    "warning"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "リクエストが不正です",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/themes/default": {
+      "get": {
+        "summary": "デフォルトテーマの取得",
+        "deprecated": false,
+        "description": "システムで設定されているデフォルトテーマを取得します",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Theme"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "put": {
+        "summary": "デフォルトテーマの設定",
+        "deprecated": false,
+        "description": "システムのデフォルトテーマを設定します",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "themeId": {
+                    "type": "string",
+                    "description": "デフォルトに設定するテーマID"
+                  }
+                },
+                "required": [
+                  "themeId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "設定成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Theme"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "リクエストが不正です",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/themes/{themeId}": {
+      "get": {
+        "summary": "テーマの取得",
+        "deprecated": false,
+        "description": "指定されたIDのテーマ詳細を取得します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "themeId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Theme"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "put": {
+        "summary": "テーマの更新",
+        "deprecated": false,
+        "description": "指定されたIDのテーマを更新します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "themeId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ThemeUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "更新成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Theme"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "リクエストが不正です",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "delete": {
+        "summary": "テーマの削除",
+        "deprecated": false,
+        "description": "指定されたIDのテーマを削除します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "themeId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "削除成功",
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/themes/{themeId}/export": {
+      "get": {
+        "summary": "テーマのエクスポート",
+        "deprecated": false,
+        "description": "指定されたテーマをZIPアーカイブとしてエクスポートします",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "themeId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/zip": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/themes/{themeId}/assets/{assetType}": {
+      "get": {
+        "summary": "テーマアセットの取得",
+        "deprecated": false,
+        "description": "指定されたテーマのアセット（テンプレート、スタイル、スクリプト）を取得します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "themeId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "assetType",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "html",
+                "style",
+                "script"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "put": {
+        "summary": "テーマアセットの更新",
+        "deprecated": false,
+        "description": "指定されたテーマのアセットファイルを更新します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "themeId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "assetType",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "html",
+                "style",
+                "script"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "filePath": {
+                    "type": "string",
+                    "description": "filemanagerのリソースパス"
+                  }
+                },
+                "required": [
+                  "filePath"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "更新成功",
+            "headers": {}
+          },
+          "400": {
+            "description": "リクエストが不正です",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/pages/{pageId}/theme": {
+      "get": {
+        "summary": "ページに設定されているテーマの取得",
+        "deprecated": false,
+        "description": "特定ページに設定されているテーマ情報を取得します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Theme"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "put": {
+        "summary": "ページのテーマ設定",
+        "deprecated": false,
+        "description": "特定ページに使用するテーマを設定します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "themeId": {
+                    "type": "string",
+                    "description": "ページに設定するテーマID"
+                  }
+                },
+                "required": [
+                  "themeId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "設定成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Theme"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "リクエストが不正です",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "delete": {
+        "summary": "ページのテーマ設定を削除",
+        "deprecated": false,
+        "description": "ページのテーマ設定を削除し、デフォルトテーマを使用するようにします",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "削除成功",
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/render/page/{pageId}": {
+      "get": {
+        "summary": "ページのレンダリング",
+        "deprecated": false,
+        "description": "ページコンテンツをHTMLとしてレンダリングした結果を取得します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "レンダリング形式（full=完全なHTML、content=コンテンツ部分のみ）",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "full",
+                "content"
+              ],
+              "default": "full"
+            }
+          },
+          {
+            "name": "themeId",
+            "in": "query",
+            "description": "使用するテーマID（指定しない場合はページ設定またはデフォルトテーマを使用）",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたリソースが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/templates/categories": {
+      "get": {
+        "summary": "テンプレートカテゴリ一覧の取得",
+        "deprecated": false,
+        "description": "利用可能なすべてのテンプレートカテゴリのリストを取得します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "一度に取得する最大項目数",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "取得開始位置のオフセット",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "TemplateCategoryに定義済みの fieldname\n",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dir",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "desc",
+                "asc"
+              ]
+            }
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "description": "fieldname=value&fieldname=value....複数指定される場合ANDと認識される",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {}
+                      }
+                    },
+                    "pagination": {
+                      "type": "object",
+                      "properties": {}
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "post": {
+        "summary": "新規テンプレートカテゴリの作成",
+        "deprecated": false,
+        "description": "新しいテンプレートカテゴリを作成します",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TemplateCategoryCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "作成成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/TemplateCategory"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "リクエストが不正です",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "409": {
+            "description": "同名のカテゴリが既に存在します",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/templates/categories/{categoryId}": {
+      "get": {
+        "summary": "テンプレートカテゴリの取得",
+        "deprecated": false,
+        "description": "指定されたIDのテンプレートカテゴリ詳細を取得します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "description": "カテゴリID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/TemplateCategory"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたカテゴリが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "put": {
+        "summary": "テンプレートカテゴリの更新",
+        "deprecated": false,
+        "description": "指定されたIDのテンプレートカテゴリを更新します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "description": "カテゴリID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TemplateCategoryUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "更新成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/TemplateCategory"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "リクエストが不正です",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたカテゴリが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "409": {
+            "description": "同名のカテゴリが既に存在します",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "delete": {
+        "summary": "テンプレートカテゴリの削除",
+        "deprecated": false,
+        "description": "指定されたIDのテンプレートカテゴリを削除します",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "description": "カテゴリID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "description": "カテゴリにテンプレートが紐づいている場合でも強制削除するかどうか",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "削除成功",
+            "headers": {}
+          },
+          "400": {
+            "description": "カテゴリにテンプレートが紐づいているため削除できません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "認証エラーが発生しました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "指定されたカテゴリが見つかりません",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/themes/{themeId}/file": {
+      "get": {
+        "summary": "テーマに設定したファイルのコンテンツを取得する",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "themeId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {}
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ContainerWithOptionalBlocks": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {}
+          },
+          {
+            "type": "object",
+            "properties": {
+              "blocks": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/BlockWithChildren"
+                },
+                "description": "include=blocks または include=containers.blocks 時に含まれる"
+              }
+            },
+            "required": [
+              "blocks"
+            ]
+          }
+        ],
+        "additionalProperties": false
+      },
+      "BlockWithChildren": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {}
+          },
+          {
+            "type": "object",
+            "properties": {
+              "children": {
+                "type": "array",
+                "description": "子ブロックの配列（複合ブロックの場合）",
+                "items": {
+                  "$ref": "#/components/schemas/BlockWithChildren"
+                }
+              }
+            }
+          }
+        ],
+        "additionalProperties": false
+      },
+      "BlockEditor": {
+        "type": "object",
+        "properties": {
+          "container": {
+            "type": "object",
+            "properties": {
+              "desktop": {
+                "type": "object",
+                "properties": {}
+              },
+              "tablet": {
+                "type": "object",
+                "properties": {}
+              },
+              "mobile": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          },
+          "metadata": {
+            "type": "object",
+            "properties": {}
+          },
+          "id": {
+            "type": "string",
+            "description": "ID番号"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Block": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ブロックの一意識別子",
+            "minLength": 1
+          },
+          "type": {
+            "type": "string",
+            "description": "ブロックのタイプ（Editor.jsのツール名に対応）",
+            "enum": [
+              "text",
+              "heading",
+              "image",
+              "video",
+              "columns",
+              "hero",
+              "slider",
+              "card",
+              "gallery",
+              "list",
+              "quote",
+              "embed",
+              "form",
+              "custom",
+              "paragraph"
+            ]
+          },
+          "data": {
+            "type": "object",
+            "description": "ブロックのコンテンツ（Editor.jsのdataオブジェクトに対応）",
+            "properties": {}
+          },
+          "name": {
+            "type": "string",
+            "description": "ブロック名"
+          },
+          "attributes": {
+            "type": "object",
+            "description": "ブロックの属性（スタイルなど）",
+            "properties": {}
+          },
+          "containerId": {
+            "type": "string",
+            "description": "所属するコンテナID"
+          },
+          "parentId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "親ブロックのID（複合ブロック内の場合）"
+          },
+          "order": {
+            "type": "integer",
+            "description": "同一レベルでの表示順"
+          },
+          "childrenIds": {
+            "type": "array",
+            "description": "子ブロックのID配列（複合ブロックの場合）",
+            "items": {
+              "type": "string"
+            }
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "最終更新日時"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "作成日時"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "type",
+          "data",
+          "order"
+        ]
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "エラーコード",
+            "minLength": 1
+          },
+          "message": {
+            "type": "string",
+            "description": "エラーメッセージ",
+            "minLength": 1
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {}
+            },
+            "description": "詳細エラー情報（オプション）"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "code",
+          "message"
+        ]
+      },
+      "BlockEditorCreate": {
+        "type": "object",
+        "properties": {
+          "container": {
+            "type": "object",
+            "properties": {}
+          },
+          "metadata": {
+            "type": "object",
+            "properties": {}
+          }
+        },
+        "additionalProperties": false
+      },
+      "Container": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "コンテナの一意識別子",
+            "minLength": 1
+          },
+          "type": {
+            "type": "string",
+            "description": "コンテナのタイプ（main, sidebar, headerなど）",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "コンテナの名前"
+          },
+          "attributes": {
+            "type": "object",
+            "description": "コンテナの属性（スタイルなど）",
+            "properties": {}
+          },
+          "editorConfig": {
+            "type": "object",
+            "description": "Editor.jsの設定（有効なツール、オプションなど）",
+            "properties": {}
+          },
+          "pageId": {
+            "type": "string",
+            "description": "所属するページID"
+          },
+          "order": {
+            "type": "integer",
+            "description": "ページ内での表示順"
+          },
+          "blockIds": {
+            "type": "array",
+            "description": "コンテナ内のブロックID配列",
+            "items": {
+              "type": "string"
+            }
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "最終更新日時"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "作成日時"
+          },
+          "blocks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Block"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "type",
+          "order"
+        ]
+      },
+      "Template": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "テンプレートの一意識別子",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "テンプレート名",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "description": "テンプレートの説明"
+          },
+          "categoryId": {
+            "type": "string",
+            "description": "テンプレートのカテゴリ"
+          },
+          "thumbnail": {
+            "type": "string",
+            "description": "サムネイル画像のURL"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "テンプレートのメタデータ",
+            "properties": {}
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "最終更新日時"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "作成日時"
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageInTemplate"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "page"
+        ]
+      },
+      "PageInTemplate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string"
+          },
+          "themeId": {
+            "type": "string"
+          },
+          "metadata": {
+            "type": "object",
+            "properties": {}
+          },
+          "settings": {
+            "type": "object",
+            "properties": {}
+          },
+          "containers": {
+            "$ref": "#/components/schemas/ContainerWithBlocks"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "id"
+        ]
+      },
+      "ContainerWithBlocks": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Container"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "blocks": {
+                "type": "array",
+                "description": "コンテナ内のブロック配列",
+                "items": {
+                  "$ref": "#/components/schemas/BlockWithChildren"
+                }
+              }
+            }
+          }
+        ],
+        "additionalProperties": false
+      },
+      "TemplateUpdate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "テンプレートid"
+          },
+          "name": {
+            "type": "string",
+            "description": "テンプレート名",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "description": "テンプレートの説明"
+          },
+          "categoryId": {
+            "type": "string",
+            "description": "テンプレートのカテゴリ"
+          },
+          "thumbnail": {
+            "type": "string",
+            "description": "サムネイル画像のURL"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "テンプレートのメタデータ",
+            "properties": {}
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageUpdateInTemplate"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "page"
+        ]
+      },
+      "PageUpdateInTemplate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "themeId": {
+            "type": "string"
+          },
+          "metadata": {
+            "type": "object",
+            "properties": {}
+          },
+          "settings": {
+            "type": "object",
+            "properties": {}
+          },
+          "containers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContainerUpdate"
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContainerUpdate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "コンテナの一意識別子",
+            "minLength": 1
+          },
+          "type": {
+            "type": "string",
+            "description": "コンテナのタイプ（main, sidebar, headerなど）",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "コンテナの名前"
+          },
+          "attributes": {
+            "type": "object",
+            "description": "コンテナの属性（スタイルなど）",
+            "properties": {}
+          },
+          "editorConfig": {
+            "type": "object",
+            "description": "Editor.jsの設定（有効なツール、オプションなど）",
+            "properties": {}
+          },
+          "order": {
+            "type": "integer",
+            "description": "ページ内での表示順"
+          },
+          "blockIds": {
+            "type": "array",
+            "description": "コンテナ内のブロックID配列（順序変更可能）",
+            "items": {
+              "type": "string"
+            }
+          },
+          "blocks": {
+            "type": "array",
+            "description": "ブロック情報（include=blocksの場合）",
+            "items": {
+              "$ref": "#/components/schemas/BlockUpdate"
+            }
+          },
+          "pageId": {
+            "type": "string",
+            "description": "containerの取得データをそのまま利用するための追加field"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "containerの取得データをそのまま利用するための追加field"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "containerの取得データをそのまま利用するための追加field"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "type"
+        ]
+      },
+      "BlockUpdate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ブロックの一意識別子",
+            "minLength": 1
+          },
+          "type": {
+            "type": "string",
+            "description": "ブロックのタイプ",
+            "enum": [
+              "text",
+              "heading",
+              "image",
+              "video",
+              "columns",
+              "hero",
+              "slider",
+              "card",
+              "gallery",
+              "list",
+              "quote",
+              "embed",
+              "form",
+              "custom",
+              "paragraph"
+            ]
+          },
+          "data": {
+            "type": "object",
+            "description": "ブロックのコンテンツ（タイプによって構造が異なる）",
+            "properties": {}
+          },
+          "name": {
+            "type": "string",
+            "description": "ブロック名"
+          },
+          "attributes": {
+            "type": "object",
+            "description": "ブロックの属性（スタイルなど）",
+            "properties": {}
+          },
+          "parentId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "親ブロックのID（複合ブロック内の場合）"
+          },
+          "order": {
+            "type": "integer",
+            "description": "同一レベルでの表示順"
+          },
+          "childrenIds": {
+            "type": "array",
+            "description": "子ブロックのID配列（順序変更可能）",
+            "items": {
+              "type": "string"
+            }
+          },
+          "children": {
+            "type": "array",
+            "description": "子ブロック情報（include=childrenの場合）",
+            "items": {
+              "type": "string"
+            }
+          },
+          "containerId": {
+            "type": "string",
+            "description": "containerの取得データをそのまま利用するための追加field"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "containerの取得データをそのまま利用するための追加field"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "containerの取得データをそのまま利用するための追加field"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "type",
+          "data"
+        ]
+      },
+      "PageWithOptionalContainersAndBlocks": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {}
+          },
+          {
+            "type": "object",
+            "properties": {
+              "containers": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ContainerWithOptionalBlocks"
+                },
+                "description": "includeパラメータやリクエスト内容に応じて含まれる"
+              }
+            },
+            "required": [
+              "containers"
+            ]
+          }
+        ],
+        "additionalProperties": false
+      },
+      "Page": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ページの一意識別子",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string",
+            "description": "ページのタイトル",
+            "minLength": 1
+          },
+          "slug": {
+            "type": "string",
+            "description": "ページのスラッグ（URLの一部）",
+            "minLength": 1
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "published",
+              "archived"
+            ],
+            "description": "ページの公開ステータス"
+          },
+          "themeId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "使用するテーマID（null=デフォルトテーマを使用）"
+          },
+          "containers": {
+            "type": "array",
+            "description": "ページ内のコンテナ配列",
+            "items": {
+              "$ref": "#/components/schemas/Container"
+            }
+          },
+          "metadata": {
+            "type": "object",
+            "description": "ページのメタデータ",
+            "properties": {}
+          },
+          "settings": {
+            "type": "object",
+            "description": "ページの設定",
+            "properties": {}
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "最終更新日時"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "作成日時",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title",
+          "slug",
+          "status"
+        ]
+      },
+      "TemplateCategory": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "カテゴリの一意識別子",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "カテゴリ名",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "description": "カテゴリの説明"
+          },
+          "displayOrder": {
+            "type": "integer",
+            "description": "表示順序"
+          },
+          "templateCount": {
+            "type": "integer",
+            "description": "このカテゴリに属するテンプレート数"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "作成日時"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "最終更新日時"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "displayOrder",
+          "templateCount"
+        ]
+      },
+      "TemplateCategoryCreate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "カテゴリ名",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "description": "カテゴリの説明"
+          },
+          "displayOrder": {
+            "type": "integer",
+            "description": "表示順序（指定しない場合は最後に配置）"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "name"
+        ]
+      },
+      "TemplateCategoryUpdate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "カテゴリ名",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "description": "カテゴリの説明"
+          },
+          "displayOrder": {
+            "type": "integer",
+            "description": "表示順序"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "name"
+        ]
+      },
+      "TemplatePatch": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "テンプレート名"
+          },
+          "description": {
+            "type": "string",
+            "description": "テンプレートの説明"
+          },
+          "categoryId": {
+            "type": "string",
+            "description": "テンプレートのカテゴリ"
+          },
+          "thumbnail": {
+            "type": "string",
+            "description": "サムネイル画像のURL"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "テンプレートのメタデータ",
+            "properties": {}
+          }
+        },
+        "additionalProperties": false,
+        "minProperties": 1
+      },
+      "PageCreate": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "ページのタイトル",
+            "minLength": 1
+          },
+          "slug": {
+            "type": "string",
+            "description": "ページのスラッグ（URLの一部）"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "published",
+              "archived"
+            ],
+            "default": "draft",
+            "description": "ページの公開ステータス"
+          },
+          "templateId": {
+            "type": "string",
+            "description": "ページ情報を参照するtemplateのId"
+          },
+          "themeId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "使用するテーマID（nullの場合はデフォルトテーマを使用）"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "ページのメタデータ",
+            "properties": {}
+          },
+          "settings": {
+            "type": "object",
+            "description": "ページの設定",
+            "properties": {}
+          },
+          "containers": {
+            "type": "array",
+            "description": "初期コンテナ配列",
+            "items": {
+              "$ref": "#/components/schemas/ContainerCreate"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "title"
+        ]
+      },
+      "ContainerCreate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "コンテナのid"
+          },
+          "type": {
+            "type": "string",
+            "description": "コンテナのタイプ（main, sidebar, headerなど）",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "コンテナの名前"
+          },
+          "attributes": {
+            "type": "object",
+            "description": "コンテナの属性（スタイルなど）",
+            "properties": {}
+          },
+          "editorConfig": {
+            "type": "object",
+            "description": "Editor.jsの設定（有効なツール、オプションなど）",
+            "properties": {}
+          },
+          "order": {
+            "type": "integer",
+            "description": "ページ内での表示順（指定しない場合は最後に追加）"
+          },
+          "blocks": {
+            "type": "array",
+            "description": "初期ブロック配列",
+            "items": {
+              "$ref": "#/components/schemas/BlockCreate"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type"
+        ]
+      },
+      "BlockCreate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ブロックのid"
+          },
+          "type": {
+            "type": "string",
+            "description": "ブロックのタイプ",
+            "enum": [
+              "text",
+              "heading",
+              "image",
+              "video",
+              "columns",
+              "hero",
+              "slider",
+              "card",
+              "gallery",
+              "list",
+              "quote",
+              "embed",
+              "form",
+              "custom",
+              "paragraph"
+            ]
+          },
+          "data": {
+            "type": "object",
+            "description": "ブロックのコンテンツ（タイプによって構造が異なる）",
+            "properties": {}
+          },
+          "name": {
+            "type": "string",
+            "description": "ブロック名"
+          },
+          "attributes": {
+            "type": "object",
+            "description": "ブロックの属性（スタイルなど）",
+            "properties": {}
+          },
+          "parentId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "親ブロックのID（複合ブロック内の場合）"
+          },
+          "order": {
+            "type": "integer",
+            "description": "同一レベルでの表示順（指定しない場合は最後に追加）"
+          },
+          "children": {
+            "type": "array",
+            "description": "子ブロック配列（複合ブロックの場合）",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "data"
+        ]
+      },
+      "PagePatch": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "ページのタイトル"
+          },
+          "slug": {
+            "type": "string",
+            "description": "ページのスラッグ（URLの一部）"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "published",
+              "archived"
+            ],
+            "description": "ページの公開ステータス"
+          },
+          "themeId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "使用するテーマID（nullの場合はデフォルトテーマを使用）"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "ページのメタデータ",
+            "properties": {}
+          },
+          "settings": {
+            "type": "object",
+            "description": "ページの設定",
+            "properties": {}
+          }
+        },
+        "additionalProperties": false,
+        "minProperties": 1
+      },
+      "ContainerPatch": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "コンテナのタイプ（main, sidebar, headerなど）"
+          },
+          "name": {
+            "type": "string",
+            "description": "コンテナの名前"
+          },
+          "attributes": {
+            "type": "object",
+            "description": "コンテナの属性（スタイルなど）",
+            "properties": {}
+          },
+          "editorConfig": {
+            "type": "object",
+            "description": "Editor.jsの設定（有効なツール、オプションなど）",
+            "properties": {}
+          },
+          "order": {
+            "type": "integer",
+            "description": "ページ内での表示順"
+          }
+        },
+        "additionalProperties": false,
+        "minProperties": 1
+      },
+      "ContainerOperation": {
+        "type": "object",
+        "properties": {
+          "op": {
+            "type": "string",
+            "enum": [
+              "update",
+              "move",
+              "delete"
+            ],
+            "description": "操作タイプ"
+          },
+          "containerId": {
+            "type": "string",
+            "description": "操作対象のコンテナID",
+            "minLength": 1
+          },
+          "data": {
+            "type": "object",
+            "description": "操作に必要なデータ（update操作の場合はコンテナ情報、move操作の場合は新しい順序）",
+            "properties": {}
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "op",
+          "containerId"
+        ]
+      },
+      "BlockOperation": {
+        "type": "object",
+        "properties": {
+          "op": {
+            "type": "string",
+            "enum": [
+              "update",
+              "move",
+              "delete"
+            ],
+            "description": "操作タイプ"
+          },
+          "blockId": {
+            "type": "string",
+            "description": "操作対象のブロックID",
+            "minLength": 1
+          },
+          "data": {
+            "type": "object",
+            "description": "操作に必要なデータ（update操作の場合はブロック情報、move操作の場合は新しい親IDと順序）",
+            "properties": {}
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "op",
+          "blockId"
+        ]
+      },
+      "Pagination": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "description": "全アイテム数"
+          },
+          "offset": {
+            "type": "integer",
+            "description": "現在のオフセット"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "1ページあたりの制限"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "total",
+          "offset",
+          "limit"
+        ]
+      },
+      "TemplateSummary": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "テンプレートの一意識別子",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "テンプレート名",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "description": "テンプレートの説明"
+          },
+          "categoryId": {
+            "type": "string",
+            "description": "テンプレートのカテゴリ"
+          },
+          "thumbnail": {
+            "type": "string",
+            "description": "サムネイル画像のURL"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "最終更新日時"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "作成日時"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name"
+        ]
+      },
+      "TemplateCreate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "テンプレート名",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "description": "テンプレートの説明"
+          },
+          "categoryId": {
+            "type": "string",
+            "description": "テンプレートのカテゴリ"
+          },
+          "thumbnail": {
+            "type": "string",
+            "description": "サムネイル画像のURL"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "テンプレートのメタデータ",
+            "properties": {}
+          },
+          "sourcePageId": {
+            "type": "string",
+            "description": "テンプレート作成元のページID",
+            "minLength": 1
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "sourcePageId"
+        ]
+      },
+      "TemplatePreview": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "テンプレートの一意識別子",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "テンプレート名",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "description": "テンプレートの説明"
+          },
+          "thumbnail": {
+            "type": "string",
+            "description": "サムネイル画像のURL"
+          },
+          "pageStructure": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Page"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "containers": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ContainerWithBlocks"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "pageStructure"
+        ]
+      },
+      "Theme": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "テーマの一意識別子",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "テーマ名",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "description": "テーマの説明"
+          },
+          "version": {
+            "type": "string",
+            "description": "テーマのバージョン"
+          },
+          "thumbnail": {
+            "type": "string",
+            "description": "サムネイル画像のURL"
+          },
+          "author": {
+            "type": "string",
+            "description": "テーマの作者"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "テーマのメタデータ",
+            "properties": {}
+          },
+          "variables": {
+            "type": "object",
+            "description": "テーマのスタイル変数（ファイルに保存されるがAPI経由でも参照可能）",
+            "properties": {
+              "colors": {
+                "type": "object",
+                "description": "カラーパレット",
+                "properties": {}
+              },
+              "typography": {
+                "type": "object",
+                "description": "タイポグラフィ設定",
+                "properties": {}
+              },
+              "spacing": {
+                "type": "object",
+                "description": "スペーシング設定",
+                "properties": {}
+              }
+            }
+          },
+          "directory": {
+            "type": "string",
+            "description": "テーマのファイルが格納されているディレクトリパス"
+          },
+          "isDefault": {
+            "type": "boolean",
+            "description": "デフォルトテーマかどうか"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "最終更新日時"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "作成日時"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name"
+        ]
+      },
+      "ThemeCreate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "テーマ名",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "description": "テーマの説明"
+          },
+          "version": {
+            "type": "string",
+            "description": "テーマのバージョン"
+          },
+          "thumbnail": {
+            "type": "string",
+            "description": "サムネイル画像のURL"
+          },
+          "author": {
+            "type": "string",
+            "description": "テーマの作者"
+          },
+          "templatePath": {
+            "type": "string",
+            "description": "HTMLテンプレートファイルへのパス"
+          },
+          "stylePath": {
+            "type": "string",
+            "description": "CSSファイルへのパス"
+          },
+          "scriptPath": {
+            "type": "string",
+            "description": "JavaScriptファイルへのパス"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "テーマのメタデータ",
+            "properties": {}
+          },
+          "variables": {
+            "type": "object",
+            "description": "テーマのスタイル変数",
+            "properties": {}
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "name"
+        ]
+      },
+      "ThemeUpdate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "テーマid"
+          },
+          "name": {
+            "type": "string",
+            "description": "テーマ名",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "description": "テーマの説明"
+          },
+          "version": {
+            "type": "string",
+            "description": "テーマのバージョン"
+          },
+          "thumbnail": {
+            "type": "string",
+            "description": "サムネイル画像のURL"
+          },
+          "scriptPath": {
+            "type": "string",
+            "description": "script fileのfull path"
+          },
+          "templatePath": {
+            "type": "string",
+            "description": "template fileのfull path"
+          },
+          "stylePath": {
+            "type": "string",
+            "description": "css fielの full path"
+          },
+          "author": {
+            "type": "string",
+            "description": "テーマの作者"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "テーマのメタデータ",
+            "properties": {}
+          },
+          "variables": {
+            "type": "object",
+            "description": "テーマのスタイル変数",
+            "properties": {}
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "最終更新日時"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "作成日時"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "name"
+        ]
+      },
+      "PageImport": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "ページのタイトル",
+            "minLength": 1
+          },
+          "slug": {
+            "type": "string",
+            "description": "ページのスラッグ（URLの一部）"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "published",
+              "archived"
+            ],
+            "default": "draft",
+            "description": "ページの公開ステータス"
+          },
+          "themeId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "使用するテーマID"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "ページのメタデータ",
+            "properties": {}
+          },
+          "settings": {
+            "type": "object",
+            "description": "ページの設定",
+            "properties": {}
+          },
+          "containers": {
+            "type": "array",
+            "description": "コンテナ配列",
+            "items": {
+              "$ref": "#/components/schemas/ContainerWithBlocks"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "title"
+        ]
+      },
+      "PageExport": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Page"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "containers": {
+                "type": "array",
+                "description": "コンテナ配列（各コンテナはブロック情報を含む）",
+                "items": {
+                  "$ref": "#/components/schemas/ContainerWithBlocks"
+                }
+              }
+            }
+          }
+        ],
+        "additionalProperties": false
+      },
+      "BlockPatch": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "description": "ブロックのコンテンツ（タイプによって構造が異なる）",
+            "properties": {}
+          },
+          "name": {
+            "type": "string",
+            "description": "ブロック名"
+          },
+          "attributes": {
+            "type": "object",
+            "description": "ブロックの属性（スタイルなど）",
+            "properties": {}
+          },
+          "order": {
+            "type": "integer",
+            "description": "同一レベルでの表示順"
+          },
+          "parentId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "親ブロックのID（複合ブロック内の場合）"
+          }
+        },
+        "additionalProperties": false,
+        "minProperties": 1
+      }
+    },
+    "securitySchemes": {}
+  },
+  "servers": [],
+  "security": []
+}

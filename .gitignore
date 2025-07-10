@@ -1,0 +1,31 @@
+# Clojure cache directories
+.cpcache/
+.clj-kondo/.cache/
+.lsp/.cache/
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+target/
+classes/
+checkouts/
+pom.xml
+pom.xml.asc
+*.jar
+*.class
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
