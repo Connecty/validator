@@ -134,39 +134,77 @@
            base-type
            [base-type constraints]))))))
 
+(defn merge-allof-schemas
+  "allOfスキーマを順次マージする"
+  [allof-schemas]
+  (reduce (fn [acc schema]
+            (cond
+              ;; Both are objects with properties
+              (and (:properties acc) (:properties schema))
+              (-> acc
+                  (update :properties merge (:properties schema))
+                  (update :required #(into (vec (or % [])) (or (:required schema) [])))
+                  (merge (dissoc schema :properties :required)))
+
+              ;; First schema is empty/nil
+              (empty? acc)
+              schema
+
+              ;; Default merge
+              :else
+              (merge acc schema)))
+          {}
+          allof-schemas))
+
+(defn expand-allof
+  "allOfを展開してシンプルなスキーマに変換"
+  [schema]
+  (cond
+    ;; allOfがある場合はマージして展開
+    (:allOf schema)
+    (let [merged (merge-allof-schemas (:allOf schema))]
+      (merge (dissoc schema :allOf) merged))
+
+    ;; その他の場合はそのまま返す
+    :else
+    schema))
+
 (defn expand-self-reference
   "自己参照を展開する"
   [schema-name schema]
-  (letfn [(expand-ref [s]
-            (cond
-              (map? s)
-              (reduce-kv
-               (fn [acc k v]
-                 (if (and (= k :$ref)
-                          (= v (str "#/components/schemas/" (name schema-name))))
-                   ;; 自己参照を安全に展開（循環プロパティを除外して元スキーマの構造を保持）
-                   (let [safe-schema (-> schema
-                                         (select-keys [:type :required :properties :additionalProperties])
-                                         (update :properties #(reduce-kv
-                                                               (fn [props k v]
-                                                                 (if (and (map? v)
-                                                                          (or (= (:$ref v) (str "#/components/schemas/" (name schema-name)))
-                                                                              (and (= "array" (:type v))
-                                                                                   (= (:$ref (:items v)) (str "#/components/schemas/" (name schema-name))))))
-                                                                   props  ; 循環参照するプロパティを除外
-                                                                   (assoc props k v)))
-                                                               {}
-                                                               %)))]
-                     (merge (dissoc acc :$ref) safe-schema))
-                   (assoc acc k (expand-ref v))))
-               {}
-               s)
+  ;; まずallOfを展開
+  (let [expanded-allof (expand-allof schema)]
+    ;; 次に既存の自己参照展開ロジックを適用
+    (letfn [(expand-ref [s]
+              (cond
+                (map? s)
+                (reduce-kv
+                 (fn [acc k v]
+                   (if (and (= k :$ref)
+                            (= v (str "#/components/schemas/" (name schema-name))))
+                     ;; 自己参照を安全に展開（循環プロパティを除外して元スキーマの構造を保持）
+                     (let [safe-schema (-> expanded-allof
+                                           (select-keys [:type :required :properties :additionalProperties])
+                                           (update :properties #(reduce-kv
+                                                                 (fn [props k v]
+                                                                   (if (and (map? v)
+                                                                            (or (= (:$ref v) (str "#/components/schemas/" (name schema-name)))
+                                                                                (and (= "array" (:type v))
+                                                                                     (= (:$ref (:items v)) (str "#/components/schemas/" (name schema-name))))))
+                                                                     props  ; 循環参照するプロパティを除外
+                                                                     (assoc props k v)))
+                                                                 {}
+                                                                 %)))]
+                       (merge (dissoc acc :$ref) safe-schema))
+                     (assoc acc k (expand-ref v))))
+                 {}
+                 s)
 
-              (vector? s)
-              (mapv expand-ref s)
+                (vector? s)
+                (mapv expand-ref s)
 
-              :else s))]
-    (expand-ref schema)))
+                :else s))]
+      (expand-ref expanded-allof))))
 
 (defn expand-circular-references
   "循環参照を展開してより単純な構造に変換"
@@ -192,7 +230,8 @@
   ([openapi-schema]
    (create-validator openapi-schema {}))
   ([openapi-schema registry]
-   (let [components-registry (create-registry registry)
+   (let [expanded-registry (expand-circular-references registry)
+         components-registry (create-registry expanded-registry)
          full-registry (merge (m/default-schemas)
                               (reduce-kv (fn [acc k v]
                                            (assoc acc k (openapi-schema->malli v components-registry)))
@@ -207,7 +246,8 @@
   ([openapi-schema]
    (create-explainer openapi-schema {}))
   ([openapi-schema registry]
-   (let [components-registry (create-registry registry)
+   (let [expanded-registry (expand-circular-references registry)
+         components-registry (create-registry expanded-registry)
          full-registry (merge (m/default-schemas)
                               (reduce-kv (fn [acc k v]
                                            (assoc acc k (openapi-schema->malli v components-registry)))
