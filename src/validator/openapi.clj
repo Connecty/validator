@@ -184,6 +184,58 @@
                  :required merged-required
                  :properties safe-props})
 
+              ;; oneOfスキーマの場合：共通プロパティを収集
+              (:oneOf schema)
+              (let [common-props (reduce (fn [acc item]
+                                           (if (:properties item)
+                                             (merge acc (:properties item))
+                                             acc))
+                                         {}
+                                         (:oneOf schema))
+                    common-required (reduce (fn [acc item]
+                                              (if (:required item)
+                                                (into acc (:required item))
+                                                acc))
+                                            []
+                                            (:oneOf schema))
+                    ;; 循環参照するプロパティを除外
+                    safe-props (reduce-kv
+                                (fn [props prop-k prop-v]
+                                  (if (self-referencing? prop-v schema-name)
+                                    props
+                                    (assoc props prop-k (expand-ref prop-v schema))))
+                                {}
+                                common-props)]
+                {:type "object"
+                 :required common-required
+                 :properties safe-props})
+
+              ;; anyOfスキーマの場合：共通プロパティを収集
+              (:anyOf schema)
+              (let [common-props (reduce (fn [acc item]
+                                           (if (:properties item)
+                                             (merge acc (:properties item))
+                                             acc))
+                                         {}
+                                         (:anyOf schema))
+                    common-required (reduce (fn [acc item]
+                                              (if (:required item)
+                                                (into acc (:required item))
+                                                acc))
+                                            []
+                                            (:anyOf schema))
+                    ;; 循環参照するプロパティを除外
+                    safe-props (reduce-kv
+                                (fn [props prop-k prop-v]
+                                  (if (self-referencing? prop-v schema-name)
+                                    props
+                                    (assoc props prop-k (expand-ref prop-v schema))))
+                                {}
+                                common-props)]
+                {:type "object"
+                 :required common-required
+                 :properties safe-props})
+
               ;; 通常のスキーマの場合
               :else
               (-> schema
