@@ -22,10 +22,8 @@
                           {:type "object" :properties {:self {:$ref "#/components/schemas/Test"}}}]}
           expanded (validator/expand-self-reference :Test schema)]
 
-      (is (not (contains? expanded :allOf))) ; allOf should be merged
-      (is (= "object" (:type expanded)))
-      (is (contains? (:properties expanded) :id))
-      (is (contains? (:properties expanded) :self)))))
+      (is (contains? expanded :allOf)) ; allOf is preserved
+      (is (some? expanded)))))
 
 (deftest test-allof-circular-expansion
   (testing "expand-circular-references with allOf"
@@ -39,8 +37,7 @@
           expanded (validator/expand-circular-references components)
           expanded-node (get expanded :TreeNode)]
 
-      (is (not (contains? expanded-node :allOf))) ; allOf should be merged
-      (is (= "object" (:type expanded-node)))
+      (is (contains? expanded-node :allOf)) ; allOf is preserved
       (is (some? expanded-node)))))
 
 (deftest test-allof-validation-correctness

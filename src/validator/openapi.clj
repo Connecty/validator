@@ -134,77 +134,82 @@
            base-type
            [base-type constraints]))))))
 
-(defn merge-allof-schemas
-  "allOfスキーマを順次マージする"
-  [allof-schemas]
-  (reduce (fn [acc schema]
-            (cond
-              ;; Both are objects with properties
-              (and (:properties acc) (:properties schema))
-              (-> acc
-                  (update :properties merge (:properties schema))
-                  (update :required #(into (vec (or % [])) (or (:required schema) [])))
-                  (merge (dissoc schema :properties :required)))
-
-              ;; First schema is empty/nil
-              (empty? acc)
-              schema
-
-              ;; Default merge
-              :else
-              (merge acc schema)))
-          {}
-          allof-schemas))
-
-(defn expand-allof
-  "allOfを展開してシンプルなスキーマに変換"
-  [schema]
-  (cond
-    ;; allOfがある場合はマージして展開
-    (:allOf schema)
-    (let [merged (merge-allof-schemas (:allOf schema))]
-      (merge (dissoc schema :allOf) merged))
-
-    ;; その他の場合はそのまま返す
-    :else
-    schema))
-
 (defn expand-self-reference
-  "自己参照を展開する"
+  "自己参照を実際のスキーマ内容で置換する"
   [schema-name schema]
-  ;; まずallOfを展開
-  (let [expanded-allof (expand-allof schema)]
-    ;; 次に既存の自己参照展開ロジックを適用
-    (letfn [(expand-ref [s]
+  (letfn [(expand-ref [s original-schema]
+            (cond
+              (map? s)
+              (reduce-kv
+               (fn [acc k v]
+                 (if (and (= k :$ref)
+                          (= v (str "#/components/schemas/" (name schema-name))))
+                   ;; 自己参照を実際のスキーマ内容で置換（循環参照するプロパティは除外）
+                   (let [safe-schema (get-safe-schema original-schema schema-name)]
+                     (merge (dissoc acc :$ref) safe-schema))
+                   (assoc acc k (expand-ref v original-schema))))
+               {}
+               s)
+
+              (vector? s)
+              (mapv #(expand-ref % original-schema) s)
+
+              :else s))
+
+          (get-safe-schema [schema schema-name]
+            (cond
+              ;; allOfスキーマの場合：allOf内のスキーマから情報を収集
+              (:allOf schema)
+              (let [merged-props (reduce (fn [acc item]
+                                           (if (:properties item)
+                                             (merge acc (:properties item))
+                                             acc))
+                                         {}
+                                         (:allOf schema))
+                    merged-required (reduce (fn [acc item]
+                                              (if (:required item)
+                                                (into acc (:required item))
+                                                acc))
+                                            []
+                                            (:allOf schema))
+                    ;; 循環参照するプロパティを除外
+                    safe-props (reduce-kv
+                                (fn [props prop-k prop-v]
+                                  (if (self-referencing? prop-v schema-name)
+                                    props
+                                    (assoc props prop-k (expand-ref prop-v schema))))
+                                {}
+                                merged-props)]
+                {:type "object"
+                 :required merged-required
+                 :properties safe-props})
+
+              ;; 通常のスキーマの場合
+              :else
+              (-> schema
+                  (select-keys [:type :required :properties :additionalProperties])
+                  (update :properties #(when %
+                                         (reduce-kv
+                                          (fn [props prop-k prop-v]
+                                            (if (self-referencing? prop-v schema-name)
+                                              props
+                                              (assoc props prop-k (expand-ref prop-v schema))))
+                                          {}
+                                          %))))))
+
+          (self-referencing? [value schema-name]
+            (let [self-ref-str (str "#/components/schemas/" (name schema-name))]
               (cond
-                (map? s)
-                (reduce-kv
-                 (fn [acc k v]
-                   (if (and (= k :$ref)
-                            (= v (str "#/components/schemas/" (name schema-name))))
-                     ;; 自己参照を安全に展開（循環プロパティを除外して元スキーマの構造を保持）
-                     (let [safe-schema (-> expanded-allof
-                                           (select-keys [:type :required :properties :additionalProperties])
-                                           (update :properties #(reduce-kv
-                                                                 (fn [props k v]
-                                                                   (if (and (map? v)
-                                                                            (or (= (:$ref v) (str "#/components/schemas/" (name schema-name)))
-                                                                                (and (= "array" (:type v))
-                                                                                     (= (:$ref (:items v)) (str "#/components/schemas/" (name schema-name))))))
-                                                                     props  ; 循環参照するプロパティを除外
-                                                                     (assoc props k v)))
-                                                                 {}
-                                                                 %)))]
-                       (merge (dissoc acc :$ref) safe-schema))
-                     (assoc acc k (expand-ref v))))
-                 {}
-                 s)
+                (and (map? value) (= (:$ref value) self-ref-str))
+                true
 
-                (vector? s)
-                (mapv expand-ref s)
+                (and (map? value)
+                     (= "array" (:type value))
+                     (= (get-in value [:items :$ref]) self-ref-str))
+                true
 
-                :else s))]
-      (expand-ref expanded-allof))))
+                :else false)))]
+    (expand-ref schema schema)))
 
 (defn expand-circular-references
   "循環参照を展開してより単純な構造に変換"
